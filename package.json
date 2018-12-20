@@ -1,0 +1,29 @@
+{
+  "name": "@cfn/pkg",
+  "version": "0.0.0",
+  "description": "Package local resources as part of a CloudFormation template",
+  "main": "cfn-pkg.js",
+  "scripts": {
+    "test": "nyc --all ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/node-cfn/pkg.git"
+  },
+  "keywords": [
+    "cloudformation",
+    "aws"
+  ],
+  "author": "Doug Moscrop <doug.moscrop@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/node-cfn/pkg/issues"
+  },
+  "homepage": "https://github.com/node-cfn/pkg#readme",
+  "devDependencies": {
+    "ava": "^0.25.0",
+    "nyc": "^13.1.0",
+    "proxyquire": "^2.1.0",
+    "sinon": "^7.2.2"
+  }
+}
