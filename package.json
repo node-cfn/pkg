@@ -25,5 +25,8 @@
     "nyc": "^13.1.0",
     "proxyquire": "^2.1.0",
     "sinon": "^7.2.2"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.0.0"
   }
 }

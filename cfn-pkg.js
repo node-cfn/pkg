@@ -1,11 +1,15 @@
 'use strict';
 
+const aws = require('aws-sdk');
+
 const isLocal = require('./is-local');
 const uploadResource = require('./upload-resource');
 const ensureBucketExists = require('./ensure-bucket-exists');
 
-module.exports = function packageLocalResources({ s3, bucketName, template, basedir }) {
+module.exports = function packageLocalResources({ credentials, bucketName, template, basedir }) {
   const { Resources = {} } = template;
+
+  const s3 = new aws.S3(credentials);
 
   const uploads = Object.values(Resources).reduce((memo, resource) => {
       const properties = resource.Properties;
