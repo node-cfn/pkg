@@ -14,7 +14,6 @@ module.exports = function ensureBucketExists(s3, Bucket, blockPublicAccess = fal
                 return;
             }
 
-            console.log('bucketock');
             return s3.putPublicAccessBlock({
                 Bucket,
                 PublicAccessBlockConfiguration: {
