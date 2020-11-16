@@ -6,7 +6,8 @@ const isLocal = require('./is-local');
 const uploadResource = require('./upload-resource');
 const ensureBucketExists = require('./ensure-bucket-exists');
 
-module.exports = function packageLocalResources({ credentials, bucketName, template, basedir }) {
+module.exports = function packageLocalResources(params) {
+  const { credentials, bucketName, blockPublicAccess, template, basedir } = params;
   const { Resources = {} } = template;
 
   const s3 = new aws.S3(credentials);
@@ -31,7 +32,7 @@ module.exports = function packageLocalResources({ credentials, bucketName, templ
   }, []);
 
   if (uploads.length > 0) {
-      return ensureBucketExists(s3, bucketName)
+      return ensureBucketExists(s3, bucketName, blockPublicAccess)
         .then(() => Promise.all(uploads.map(upload => upload())))
         .then(() => { template });
   }
