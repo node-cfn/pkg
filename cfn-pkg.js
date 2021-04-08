@@ -11,13 +11,16 @@ module.exports = function packageLocalResources(params) {
   const { Resources = {} } = template;
 
   const s3 = new aws.S3(credentials);
+  const supportedResources = new Set([
+    'AWS::CloudFormation::Stack',
+  ]);
 
   const uploads = Object.values(Resources).reduce((memo, resource) => {
       const properties = resource.Properties;
 
-      if (resource.Type === 'AWS::CloudFormation::Stack') {
+      if (supportedResources.has(resource.Type)) {
         const url = properties.TemplateURL;
-        
+
         if (isLocal(url)) {
           memo.push(() => {
             return uploadResource(s3, bucketName, basedir, url)
