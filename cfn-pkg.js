@@ -21,7 +21,7 @@ module.exports = function packageLocalResources(params) {
       if (supportedResources.has(resource.Type)) {
         const url = properties.TemplateURL;
 
-        if (isLocal(url)) {
+        if (url && isLocal(url)) {
           memo.push(() => {
             return uploadResource(s3, bucketName, basedir, url)
                 .then(newURL => {
