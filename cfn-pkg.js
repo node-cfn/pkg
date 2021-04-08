@@ -13,6 +13,7 @@ module.exports = function packageLocalResources(params) {
   const s3 = new aws.S3(credentials);
   const supportedResources = new Set([
     'AWS::CloudFormation::Stack',
+    'AWS::CloudFormation::StackSet'
   ]);
 
   const uploads = Object.values(Resources).reduce((memo, resource) => {
