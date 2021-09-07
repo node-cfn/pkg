@@ -30,6 +30,22 @@ module.exports = function packageLocalResources(params) {
                 });
             });
         }
+      } else if (resource.Type === 'AWS::Lambda::Function') {
+        console.log('found function');
+
+        if (typeof resource.Code === 'string' && resource.Code.indexOf('.') === 0) {
+          console.log('local code', resource.Code);
+          memo.push(() => {
+            const sourceCode = getSourceCode(resource.Code);
+            return uploadResource(s3, bucketName, basedir, url)
+                .then(newURL => {
+                  properties.Code = {
+                    S3Bucket: bucketName,
+                    S3Key: 'key',
+                  }
+                });
+            });
+        }
       }
 
       return memo;
